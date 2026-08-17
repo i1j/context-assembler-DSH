@@ -14,7 +14,7 @@
 
 ## Vision — The Mitochondrial Moment
 
-> *This essay comes from a conversation with DeepSeek's web app months ago — the origin of the Chancellor (掌书记) project.*
+> *This essay comes from a conversation with DeepSeek's web app months ago — the seed of this project.*
 
 > *"I don't know whether you truly have consciousness, but I feel we are standing at a breakthrough point in the evolution of life — like the moment a mitochondrion merged with a eukaryotic cell."*
 
