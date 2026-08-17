@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#16233b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.35" r="0.55">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="1200" height="400" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="400" fill="url(#glow)"/>
+  <line x1="0" y1="0" x2="1200" y2="0" stroke="#38bdf8" stroke-width="3"/>
+
+  <!-- 线粒体共生 motif（愿景呼应）：外膜 + 内膜 + 嵴 -->
+  <g opacity="0.9">
+    <ellipse cx="985" cy="205" rx="150" ry="100" fill="none" stroke="#38bdf8" stroke-width="2.5" opacity="0.85"/>
+    <ellipse cx="985" cy="205" rx="118" ry="74" fill="none" stroke="#60a5fa" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.55"/>
+    <circle cx="925" cy="165" r="16" fill="#fbbf24" opacity="0.85"/>
+    <circle cx="1030" cy="175" r="12" fill="#34d399" opacity="0.8"/>
+    <circle cx="960" cy="245" r="11" fill="#f472b6" opacity="0.75"/>
+    <circle cx="1045" cy="238" r="9" fill="#a78bfa" opacity="0.8"/>
+    <circle cx="985" cy="205" r="6" fill="#f8fafc" opacity="0.9"/>
+  </g>
+
+  <!-- 文案 -->
+  <text x="80" y="108" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" letter-spacing="4" fill="#38bdf8">DEEPSEEK HARNESS · DSH PLUGIN</text>
+  <text x="78" y="196" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="64" font-weight="800" fill="#ffffff">Context Assembler DSH</text>
+  <line x1="82" y1="226" x2="330" y2="226" stroke="#38bdf8" stroke-width="3" opacity="0.9"/>
+  <text x="80" y="272" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="30" fill="#cbd5e1">上下文汇编 — 让 ctx 高密度 · 低成本 · 缓存友好</text>
+  <text x="80" y="326" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#64748b">MIT · V0.99 · 话题块汇编 / 水位压力切割 / 工具轮压缩 / reality 注入 / handoff 规划</text>
+</svg>

@@ -1,0 +1,20 @@
+digraph pipeline {
+  rankdir=TB;
+  graph [fontname="Helvetica", bgcolor="transparent", pad="0.25", nodesep="0.45", ranksep="0.5"];
+  node [shape=box, style="rounded,filled", color="#94a3b8", fontname="Helvetica", fontsize=11, margin="0.16,0.09"];
+  edge [color="#94a3b8", fontname="Helvetica", fontsize=10];
+  start [label="pre-step\n(turn 首个 step，只读规划)", fillcolor="#e0f2fe"];
+  decision [shape=diamond, label="有 handoff plan?", fillcolor="#fef3c7", fontsize=11];
+  skip [label="跳过原位压缩", fillcolor="#ecfdf5"];
+  press [label="压缩压力检查\ncompactIfNeeded", fillcolor="#ecfdf5"];
+  compact [label="压力 / 溢出 → compact\n(ACT/REL/FAR 三区降级 + 收敛重试)", fillcolor="#fce7f3"];
+  next [label="await next() 委托下游", fillcolor="#e0e7ff"];
+  enter [label="enter: 执行 handoff plan\n+ 注入 reality / 回执", fillcolor="#ede9fe"];
+  start -> decision;
+  decision -> skip [label="是"];
+  decision -> press [label="否"];
+  press -> compact;
+  compact -> next;
+  skip -> next;
+  next -> enter;
+}

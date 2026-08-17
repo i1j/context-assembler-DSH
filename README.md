@@ -2,9 +2,13 @@
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![version](https://img.shields.io/badge/version-0.99.0-blue.svg)](CHANGELOG.md)
-![tests](https://img.shields.io/badge/tests-429%20passing-brightgreen.svg)
+![tests](https://img.shields.io/badge/tests-466%20passing-brightgreen.svg)
 
 *[中文](README.zh.md)*
+
+<p align="center">
+  <img src="docs/images/banner.png" alt="Context Assembler DSH — 上下文汇编" width="100%"/>
+</p>
 
 ---
 
@@ -69,6 +73,11 @@ It is a DSH-port of the Context Assembler design (see [docs/DESIGN.md](docs/DESI
 | **Handoff planning** | Pressure-triggered session handoff with branch summaries, edge strength, viewpoint and route-policy computation |
 | **`ca-db` public library** | Exported persistence DDL/helpers for topics & realities (`context-assembler-dsh/ca-db`) |
 
+<p align="center">
+  <img src="docs/images/topic-blocks.png" alt="话题块机制" width="72%"/>
+  <br/><em>话题块机制：块内摘要版本保持稳定前缀（缓存命中），切换时定级冻结，块开头注入 reality</em>
+</p>
+
 ## Install
 
 ```sh
@@ -107,7 +116,16 @@ Local 4B backfill endpoints (`toolBackfillUrl`, `realityEmbedUrl`, `oodaBackfill
 
 ## How it works
 
+<p align="center">
+  <img src="docs/images/pipeline.png" alt="pre-step 流水线" width="72%"/>
+</p>
+
 Inside `pre-step`, the plugin runs a fixed order: **handoff planning first, compaction as fallback** (per user ruling): only when there is no handoff plan does it run the compaction pressure check; then it delegates downstream and, on `enter`, executes the handoff plan and appends injection/reality receipts. Only the first step of a turn decides (A19). All pressure diagnostics are isolated per session.
+
+<p align="center">
+  <img src="docs/images/tool-rewrite.png" alt="工具轮压缩链路" width="72%"/>
+  <br/><em>工具轮压缩：确定性结构化摘要 + wire 级结果改写（dry-run 可验证），压缩云端 token 成本</em>
+</p>
 
 ## Development
 

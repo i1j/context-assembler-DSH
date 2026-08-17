@@ -2,9 +2,13 @@
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![version](https://img.shields.io/badge/version-0.99.0-blue.svg)](CHANGELOG.md)
-![tests](https://img.shields.io/badge/tests-429%20passing-brightgreen.svg)
+![tests](https://img.shields.io/badge/tests-466%20passing-brightgreen.svg)
 
 *[English](README.md)*
+
+<p align="center">
+  <img src="docs/images/banner.png" alt="Context Assembler DSH — 上下文汇编" width="100%"/>
+</p>
 
 ---
 
@@ -83,6 +87,11 @@
 | **handoff 规划** | 压力触发会话交接：分支摘要、边强度、视角、路由策略计算 |
 | **`ca-db` 公开库** | 话题/realities 持久化 DDL 与辅助（`context-assembler-dsh/ca-db` 导出） |
 
+<p align="center">
+  <img src="docs/images/topic-blocks.png" alt="话题块机制" width="72%"/>
+  <br/><em>话题块机制：块内摘要版本保持稳定前缀（缓存命中），切换时定级冻结，块开头注入 reality</em>
+</p>
+
 ## 安装
 
 ```sh
@@ -121,7 +130,16 @@ pnpm build
 
 ## 工作原理
 
+<p align="center">
+  <img src="docs/images/pipeline.png" alt="pre-step 流水线" width="72%"/>
+</p>
+
 在 `pre-step` 内按固定顺序执行（用户裁定：**handoff 优先、压缩兜底**）：先做 handoff 只读规划（有 plan 则跳过原位压缩）→ 无 plan 才做压缩压力检查 → `await next()` 委托下游 → 仅下游 `enter` 时执行 handoff plan 并追加注入/reality 回执。仅 turn 内首个 step 决策（A19）。压力诊断按 session 隔离。
+
+<p align="center">
+  <img src="docs/images/tool-rewrite.png" alt="工具轮压缩链路" width="72%"/>
+  <br/><em>工具轮压缩：确定性结构化摘要 + wire 级结果改写（dry-run 可验证），压缩云端 token 成本</em>
+</p>
 
 ## 开发
 

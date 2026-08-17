@@ -1,0 +1,20 @@
+digraph topicblocks {
+  rankdir=LR;
+  graph [fontname="Helvetica", bgcolor="transparent", pad="0.25", nodesep="0.5", ranksep="0.7"];
+  node [shape=box, style="rounded,filled", color="#94a3b8", fontname="Helvetica", fontsize=11, margin="0.16,0.09"];
+  edge [color="#94a3b8", fontname="Helvetica", fontsize=10];
+  session [label="会话轮次流\n(用户 + 工具 + LLM)", fillcolor="#e0f2fe", shape=cylinder];
+  block1 [label="话题块 A\n本块视角摘要版本（稳定前缀）", fillcolor="#dbeafe"];
+  block2 [label="话题块 B\n新摘要版本", fillcolor="#dcfce7"];
+  block3 [label="话题块 C …", fillcolor="#fef9c3"];
+  tail [label="尾部硬保护\n末 2 个 user 轮原文", fillcolor="#f3e8ff"];
+  grade [label="切换时快照定级\nACT / REL / FAR（冻结到下次切换）", fillcolor="#fce7f3"];
+  reality [label="块开头注入 reality\n(本地 4B 拣选)", fillcolor="#ecfdf5"];
+  cache [label="块内前缀稳定\n→ 云端 prompt 缓存命中", fillcolor="#fef3c7"];
+  session -> block1 -> block2 -> block3;
+  block1 -> grade [style=dotted, label="切换时"];
+  block1 -> reality [style=dotted];
+  block2 -> reality [style=dotted];
+  block3 -> tail [style=dotted, label="尾部"];
+  grade -> cache [style=dotted];
+}
