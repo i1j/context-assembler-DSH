@@ -1,0 +1,8 @@
+# CA-DSH bundle patch — mounts the Context Assembler plugin into a profile layer stack.
+# The profile's own cordis.patch.yml and any --patch overlays still apply
+# after this layer; rows here can be overridden by id in later layers.
+# (样板：packages/bundle/base/cordis.patch.yml 的 insert 块结构；
+#  patch insert id 是插件实例 id，loader 按包名注册。)
+- insert:
+    - id: ca-dsh
+      name: 'ca-dsh'
