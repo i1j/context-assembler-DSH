@@ -24,6 +24,6 @@
   <text x="80" y="108" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" letter-spacing="4" fill="#38bdf8">DEEPSEEK HARNESS · DSH PLUGIN</text>
   <text x="78" y="196" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="64" font-weight="800" fill="#ffffff">Context Assembler DSH</text>
   <line x1="82" y1="226" x2="330" y2="226" stroke="#38bdf8" stroke-width="3" opacity="0.9"/>
-  <text x="80" y="272" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="30" fill="#cbd5e1">上下文汇编 — 让 ctx 高密度 · 低成本 · 缓存友好</text>
+  <text x="80" y="272" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="30" fill="#cbd5e1">上下文汇编 — 追求每token最大互信息量</text>
   <text x="80" y="326" font-family="Helvetica, Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#64748b">MIT · V0.99 · 话题块汇编 / 水位压力切割 / 工具轮压缩 / reality 注入 / handoff 规划</text>
 </svg>
