@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.99.0 (2026-08-18) — CA-DSH V0.99 首次公开发布
+## 0.99.0 (2026-08-18) — Context Assembler DSH V0.99 首次公开发布（中文全称：上下文汇编）
 
 Context Assembler（上下文汇编）的 DeepSeek Harness 插件版公开首发，承接 Hermes
 `ca_assembler` 的设计意图（见 [docs/DESIGN.md](docs/DESIGN.md)），在 DSH 插件框架下实现。

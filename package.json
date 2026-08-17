@@ -1,7 +1,7 @@
 {
-  "name": "ca-dsh",
+  "name": "context-assembler-dsh",
   "version": "0.99.0",
-  "description": "CA-DSH V0.99 — Context Assembler plugin for DeepSeek Harness (dsh): context compaction, cache-friendly topic-block management, water-pressure topic splitting, tool trace/rewrite, handoff planning and reality recall injection.",
+  "description": "Context Assembler DSH V0.99 — Context Assembler plugin for DeepSeek Harness (dsh): context compaction, cache-friendly topic-block management, water-pressure topic splitting, tool trace/rewrite, handoff planning and reality recall injection.",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -62,11 +62,11 @@
   "author": "i1j",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/i1j/ca-dsh.git"
+    "url": "git+https://github.com/i1j/context-assembler-DSH.git"
   },
-  "homepage": "https://github.com/i1j/ca-dsh",
+  "homepage": "https://github.com/i1j/context-assembler-DSH",
   "bugs": {
-    "url": "https://github.com/i1j/ca-dsh/issues"
+    "url": "https://github.com/i1j/context-assembler-DSH/issues"
   },
   "keywords": [
     "dsh-plugin",

@@ -4,14 +4,14 @@
  * 运行期校验默认入口可用（pnpm vitest 经 exports 解析）。
  */
 import { describe, expect, it } from 'vitest';
-import { CA_DB_VERSION, openCaDb } from 'ca-dsh/ca-db';
-import { TOPIC_STATE_KEY, createTopicStateProjection } from 'ca-dsh/topic-state';
-import { collectPressureSignals, PRESSURE_DEFAULTS } from 'ca-dsh/handoff-metrics';
-import { evaluateHandoff, HANDOFF_DEFAULTS, partitionBranches } from 'ca-dsh/handoff-plan';
-import { BranchSummaryParseError, HANDOFF_BRANCH_INSTRUCTION } from 'ca-dsh/handoff-branch-summary';
-import { EDGE_DEFAULTS, EDGE_KIND, emptyEdge, hebbianUpdate } from 'ca-dsh/edge-strength';
-import { buildCaGraph, shortestPath } from 'ca-dsh/viewpoint';
-import { ROUTE_STRATEGIES, assertRouteDecision, decideRoute } from 'ca-dsh/route-policy';
+import { CA_DB_VERSION, openCaDb } from 'context-assembler-dsh/ca-db';
+import { TOPIC_STATE_KEY, createTopicStateProjection } from 'context-assembler-dsh/topic-state';
+import { collectPressureSignals, PRESSURE_DEFAULTS } from 'context-assembler-dsh/handoff-metrics';
+import { evaluateHandoff, HANDOFF_DEFAULTS, partitionBranches } from 'context-assembler-dsh/handoff-plan';
+import { BranchSummaryParseError, HANDOFF_BRANCH_INSTRUCTION } from 'context-assembler-dsh/handoff-branch-summary';
+import { EDGE_DEFAULTS, EDGE_KIND, emptyEdge, hebbianUpdate } from 'context-assembler-dsh/edge-strength';
+import { buildCaGraph, shortestPath } from 'context-assembler-dsh/viewpoint';
+import { ROUTE_STRATEGIES, assertRouteDecision, decideRoute } from 'context-assembler-dsh/route-policy';
 
 describe('7.3 公开子路径 exports（types + default 同源）', () => {
   it('ca-db / topic-state / handoff-* / edge-strength / viewpoint / route-policy 均可解析', () => {

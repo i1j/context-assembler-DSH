@@ -1,8 +1,8 @@
-# CA-DSH（V0.99）设计意图与 Hermes ca_assembler 对照（意图可查文档）
+# Context Assembler DSH（V0.99，上下文汇编）设计意图与 Hermes ca_assembler 对照（意图可查文档）
 
 > 状态：2026-08-15 查验后更新；2026-08-18 补 B7-B9 缺陷修复记录（文档核对确认）与 B10
 > reality 注入运行时根因修复（payload.messages 权威来源）。
-> 用途：本文件记录 CA-DSH 的设计目标、与开源 Hermes `ca_assembler` 的权威对照、
+> 用途：本文件记录 Context Assembler DSH 的设计目标、与开源 Hermes `ca_assembler` 的权威对照、
 > 已修复问题与未闭合差距，作为后续编码与评审的单一意图源。
 > 版本口径（2026-08-15 裁定）：**不设 V8**；对外公开版本以 0.99.x 命名，内部迭代延续 7.x 语义。
 

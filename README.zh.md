@@ -1,4 +1,4 @@
-# CA-DSH — DeepSeek Harness 上下文汇编插件
+# 上下文汇编（Context Assembler DSH）— DeepSeek Harness 上下文汇编插件
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![version](https://img.shields.io/badge/version-0.99.0-blue.svg)](CHANGELOG.md)
@@ -66,7 +66,7 @@
 
 ## 这是什么
 
-CA-DSH（DeepSeek Harness 上下文汇编插件）是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件：让上下文窗口保持高密度、缓存友好、低开销——花尽可能少的钱，向云端 LLM 提供单位 token 互信息密度最大的 ctx。
+上下文汇编（Context Assembler DSH，短名 CA-DSH）是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件：让上下文窗口保持高密度、缓存友好、低开销——花尽可能少的钱，向云端 LLM 提供单位 token 互信息密度最大的 ctx。
 
 它是 Context Assembler 设计（权威对照见 [docs/DESIGN.md](docs/DESIGN.md)，与开源 Hermes `ca_assembler` 一一对应）的 DSH 移植，实现为纯计算的 Cordis 插件，除 `@deepseek-ai/dsh-*` peer 依赖外零主机依赖。
 
@@ -81,17 +81,17 @@ CA-DSH（DeepSeek Harness 上下文汇编插件）是 [DeepSeek Harness](https:/
 | **reality 召回注入** | 本地 4B embedding + 拣选，话题块开头注入相关背景资料（fail-open：库缺失即停用，不中断会话） |
 | **思考卡（OODA）装配** | Fct 多事务 thought+tool 合流装配 + L1 事实附录（本地 4B 离线提炼，默认关、渐进验证） |
 | **handoff 规划** | 压力触发会话交接：分支摘要、边强度、视角、路由策略计算 |
-| **`ca-db` 公开库** | 话题/realities 持久化 DDL 与辅助（`ca-dsh/ca-db` 导出） |
+| **`ca-db` 公开库** | 话题/realities 持久化 DDL 与辅助（`context-assembler-dsh/ca-db` 导出） |
 
 ## 安装
 
 ```sh
 # 经 DSH 插件管理器（发布后 / 或 git 源）
-dsh plugin add ca-dsh
+dsh plugin add context-assembler-dsh
 
 # 源码方式
-git clone https://github.com/i1j/ca-dsh.git
-cd ca-dsh
+git clone https://github.com/i1j/context-assembler-DSH.git
+cd context-assembler-DSH
 pnpm install
 pnpm build
 ```
@@ -130,7 +130,7 @@ pnpm build   # tsc --noEmit
 pnpm test    # vitest run — 38 文件 429 用例
 ```
 
-> 内部插件 id 仍为 `ca-v7`（投影键 `ca-v7/*`、`source.plugin='ca-v7'`），发布的包名为 `ca-dsh`——这是稳定的内部标识，用户无感。
+> 内部插件 id 仍为 `ca-v7`（投影键 `ca-v7/*`、`source.plugin='ca-v7'`），发布的包名为 `context-assembler-dsh`——这是稳定的内部标识，用户无感。
 
 ## 文档
 
