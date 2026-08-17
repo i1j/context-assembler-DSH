@@ -59,6 +59,9 @@
     }
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "i1j",
   "repository": {
     "type": "git",
