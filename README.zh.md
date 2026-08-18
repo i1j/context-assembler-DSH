@@ -50,7 +50,7 @@
 
 ---
 
-## 这是什么
+## 插件简介
 
 上下文汇编（Context Assembler DSH，短名 CA-DSH）是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件：让上下文窗口保持高密度、缓存友好、低开销——花尽可能少的钱，向云端 LLM 提供单位 token 互信息密度最大的 ctx。
 
