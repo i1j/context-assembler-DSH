@@ -1,8 +1,8 @@
 digraph toolrewrite {
-  rankdir=LR;
-  graph [fontname="Helvetica", bgcolor="transparent", pad="0.25", nodesep="0.45", ranksep="0.7"];
-  node [shape=box, style="rounded,filled", color="#94a3b8", fontname="Helvetica", fontsize=11, margin="0.16,0.09"];
-  edge [color="#94a3b8", fontname="Helvetica", fontsize=10];
+  rankdir=TB;
+  graph [fontname="Helvetica", bgcolor="transparent", pad="0.25", nodesep="0.5", ranksep="0.5"];
+  node [shape=box, style="rounded,filled", color="#94a3b8", fontname="Helvetica", fontsize=13, margin="0.18,0.10"];
+  edge [color="#94a3b8", fontname="Helvetica", fontsize=12];
   raw [label="toolCall / toolResult 原文", fillcolor="#f1f5f9"];
   sum [label="tool-summarizer\n结构化摘要\n(确定性 · 无 LLM)", fillcolor="#dbeafe"];
   elm [label="视图 Elm 文本替换\n(工具摘要进摘要输入)", fillcolor="#dcfce7"];
