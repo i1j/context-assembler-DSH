@@ -52,7 +52,7 @@
 
 ## 插件简介
 
-上下文汇编（Context Assembler DSH，短名 CA-DSH）是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件：让上下文窗口保持高密度、缓存友好、低开销——花尽可能少的钱，向云端 LLM 提供单位 token 互信息密度最大的 ctx。
+上下文汇编（Context Assembler DSH CA-DSH）是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件：让上下文窗口保持高密度、缓存友好、低开销——花尽可能少的钱，向云端 LLM 提供单位 token 互信息密度最大的 ctx。
 
 它是 Context Assembler 设计（权威对照见 [docs/DESIGN.md](docs/DESIGN.md)，与开源 Hermes `ca_assembler` 一一对应）的 DSH 移植，实现为纯计算的 Cordis 插件，除 `@deepseek-ai/dsh-*` peer 依赖外零主机依赖。
 
