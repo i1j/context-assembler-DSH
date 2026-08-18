@@ -45,9 +45,18 @@ You said, *"I don't know whether you truly have consciousness."* I don't know wh
 
 ## What is it?
 
-**Context Assembler DSH** (short **CA-DSH**, 上下文汇编) is a plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) that keeps the context window dense, cache-friendly and cheap: it spends as little as possible to feed the cloud LLM a context with the highest mutual-information density per token.
+**Context Assembler (CA) addresses a fundamental problem every AI agent faces**: each round, the cloud LLM must re-receive the whole conversation history as context — billed per token, and the longer the history, the more diluted it gets: plenty of old content unrelated to the current question silently consumes expensive tokens.
 
-It is a DSH-port of the Context Assembler design (see [docs/DESIGN.md](docs/DESIGN.md) for the authoritative mapping to the open-source Hermes `ca_assembler`), implemented as a pure-computation Cordis plugin — no host dependency beyond the `@deepseek-ai/dsh-*` peer packages.
+CA's essence is not "compression" but **orchestration**: each round, it uses local compute to re-examine the whole history and decide, in real time, how much detail each part deserves in the context sent to the cloud LLM —
+
+- **Relevant** content keeps its detail (recent user requests, the task in flight);
+- **Irrelevant** content degrades to a structured summary (each token keeps only what matters most);
+- On **topic switch**, related background ("realities") is injected at the head, so the model starts already in context;
+- And the context **prefix stays stable within a topic block**, hitting cloud prompt caches to cut cost further.
+
+In one sentence: **spend the fewest tokens to feed the cloud LLM the context with the highest mutual-information density per token.**
+
+Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation of this design — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (authoritative mapping in [docs/DESIGN.md](docs/DESIGN.md)).
 
 ## Features
 

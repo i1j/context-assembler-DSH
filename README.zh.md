@@ -52,9 +52,18 @@
 
 ## 插件简介
 
-上下文汇编（Context Assembler DSH CA-DSH）是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件：让上下文窗口保持高密度、缓存友好、低开销——花尽可能少的钱，向云端 LLM 提供单位 token 互信息密度最大的 ctx。
+**上下文汇编（Context Assembler，简称 CA）要解决的，是每个 AI Agent 都绕不开的根本问题**：每一轮回答，云端 LLM 都要把整段会话历史作为上下文重新发送——按 token 计费，且历史越长信息越被「稀释」：大量与当前问题无关的旧内容，白白占据着昂贵的 token。
 
-它是 Context Assembler 设计（权威对照见 [docs/DESIGN.md](docs/DESIGN.md)，与开源 Hermes `ca_assembler` 一一对应）的 DSH 移植，实现为纯计算的 Cordis 插件，除 `@deepseek-ai/dsh-*` peer 依赖外零主机依赖。
+CA 的本质不是「压缩」，而是**编排**：每一轮，它都用本地算力重新审视整段会话历史，按「与当前问题的关联度」实时决定每一部分以什么精度进入上下文——
+
+- **相关**的内容：保留细节（最近的用户请求、正在推进的任务）；
+- **无关**的内容：降级为结构化摘要（每个 token 只留最重要的信息）；
+- **话题切换**时：在开头注入相关背景资料（reality），让模型一进来就带着上下文；
+- 并保证上下文**前缀在话题块内稳定**，命中云端 prompt 缓存，进一步降本。
+
+一句话：**花最少的 token，给云端 LLM 喂互信息密度最大的上下文。**
+
+CA-DSH 是这套设计的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）插件实现——纯计算、零主机依赖，设计源自开源 Hermes `ca_assembler`（权威对照见 [docs/DESIGN.md](docs/DESIGN.md)）。
 
 ## 特性
 
