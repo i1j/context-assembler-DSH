@@ -42,6 +42,9 @@ docs/images/  README diagrams — sources in docs/images/src/*.dot (graphviz)
 Optional runtime features (reality recall, tool backfill, thought assembly) default to a
 local Ollama-compatible endpoint (`http://127.0.0.1:11435`) and are all **fail-open**: a
 missing model or DB disables the feature, never the session. Tests mock or skip these paths.
+All CA Ollama LLM calls declare queue priority per request via `X-Queue-Priority: high|normal|low`;
+keep using the main proxy port `11435` for CA — the dedicated ports `11436/11438/11439/11440`
+are for clients that cannot set headers (e.g. OpenViking).
 
 ## License
 

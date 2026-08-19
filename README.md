@@ -56,6 +56,10 @@ CA's essence is not "compression" but **orchestration**: each round, it uses loc
 
 In one sentence: **spend the fewest tokens to feed the cloud LLM the context with the highest mutual-information density per token.**
 
+**Design philosophy — compute substitution (converged with an external design review, 2026-08-20).**
+
+CA's underlying insight is a **compute substitution**: it uses the local small model's *discrete, low-bandwidth idle compute between turns* to replace the cloud LLM's *burst, high-bandwidth compute* needed to compact conversation history — offloading a peak-cost operation onto local idle cycles. To protect cloud prompt-cache hits, this substitution is applied **per topic block**: the prefix stays stable inside a block (only the tail raw-data protection zone `tailN` varies), and only on a topic switch are blocks re-summarized into a new assembled prefix; `topicSplitStartChars → topicSplitPeakChars` linearly lowers the split threshold so long sessions never fuse into a single unwieldy block. The quality goal is **maximum mutual-information density per token**, backed by an MI-loss evaluation suite (see [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md)).
+
 Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation of this design — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (authoritative mapping in [docs/DESIGN.md](docs/DESIGN.md)).
 
 ## Features
@@ -110,7 +114,7 @@ The plugin is mounted via `cordis.patch.yml` and configured through the DSH prof
 | `realityRecallEnabled` / `realityDbPath` / `realityTopK` | `false` / `./ca_cache/ca_topics.db` / `1` | reality recall injection (fail-open) |
 | `oodaRewriteEnabled` / `oodaThinkBudget` | `false` / `2000` | thought (OODA) assembly (off by default until validated) |
 
-Local 4B backfill endpoints (`toolBackfillUrl`, `realityEmbedUrl`, `oodaBackfillUrl`, …) default to an Ollama-compatible local endpoint (`http://127.0.0.1:11435`) and are all fail-open.
+Local 4B backfill endpoints (`toolBackfillUrl`, `realityEmbedUrl`, `oodaBackfillUrl`, …) default to the ollama-priority-proxy main endpoint (`http://127.0.0.1:11435`) and are all fail-open. All CA Ollama LLM calls declare their queue priority per request via `X-Queue-Priority: high|normal|low`; the dedicated ports `11436/11438/11439/11440` are reserved for clients that cannot set headers (e.g. OpenViking).
 
 ## How it works
 
@@ -129,7 +133,7 @@ Inside `pre-step`, the plugin runs a fixed order: **handoff planning first, comp
 
 ```sh
 pnpm build   # tsc --noEmit
-pnpm test    # vitest run — 38 files, 429 tests
+pnpm test    # vitest run — 38 files, 466 tests
 ```
 
 > Internal plugin id remains `ca-v7` (projection keys `ca-v7/*`, `source.plugin='ca-v7'`); the published package name is `context-assembler-dsh`. This is a stable internal identifier, not user-facing.
@@ -137,6 +141,8 @@ pnpm test    # vitest run — 38 files, 429 tests
 ## Docs
 
 - [docs/DESIGN.md](docs/DESIGN.md) — design intent & authoritative mapping to Hermes `ca_assembler`, fixed-issue ledger, open roadmap
+- [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md) — planning summary (compute substitution / cache discipline / roadmap R1–R3 / ops convention)
+- [docs/PROGRESS-2026-08-20.md](docs/PROGRESS-2026-08-20.md) — progress report (release state / capabilities / recent work / review status)
 - [docs/decisions/](docs/decisions/) — architecture decision records (ADRs)
 
 ## License

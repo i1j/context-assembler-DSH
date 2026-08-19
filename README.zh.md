@@ -63,6 +63,10 @@ CA 的本质不是「压缩」，而是**编排**：每一轮，它都用本地�
 
 一句话：**花最少的 token，给云端 LLM 喂互信息密度最大的上下文。**
 
+**设计理念 —— 算力置换（2026-08-20 外部专家对话收敛）**
+
+CA 的底层洞察是一次**算力置换**：用本地小模型「离散到每个对话轮间隙的低带宽算力」，替代云端大模型在压缩会话历史时的「瞬发、高带宽」算力需求——把原本峰值性的压缩算力卸载到本地空闲期。为保护云端 prompt 缓存命中，这一置换**按话题块打包**：块内前缀稳定（仅尾部原始数据保护区 `tailN` 可变），只有切换话题时才重新评估各块的摘要简写、形成新的汇编前缀；`topicSplitStartChars → topicSplitPeakChars` 之间线性降低切块门槛，防止超长对话粘连成单一话题块。质量目标 = **每 token 互信息密度最大**，配套 MI 损失评估体系（见 [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md)）。
+
 CA-DSH 是这套设计的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）插件实现——纯计算、零主机依赖，设计源自开源 Hermes `ca_assembler`（权威对照见 [docs/DESIGN.md](docs/DESIGN.md)）。
 
 ## 特性
@@ -117,7 +121,7 @@ pnpm build
 | `realityRecallEnabled` / `realityDbPath` / `realityTopK` | `false` / `./ca_cache/ca_topics.db` / `1` | reality 召回注入（fail-open） |
 | `oodaRewriteEnabled` / `oodaThinkBudget` | `false` / `2000` | 思考装配（默认关，验证后再开） |
 
-本地 4B 回填端点（`toolBackfillUrl`、`realityEmbedUrl`、`oodaBackfillUrl` 等）默认指向 Ollama 兼容本地端点（`http://127.0.0.1:11435`），全部 fail-open。
+本地 4B 回填端点（`toolBackfillUrl`、`realityEmbedUrl`、`oodaBackfillUrl` 等）默认指向 ollama-priority-proxy 主入口（`http://127.0.0.1:11435`），全部 fail-open。CA 的所有 Ollama LLM 调用按请求用 `X-Queue-Priority: high|normal|low` 头声明队列优先级；`11436/11438/11439/11440` 专用端口保留给不能设置请求头的客户端（如 OpenViking）。
 
 ## 工作原理
 
@@ -136,7 +140,7 @@ pnpm build
 
 ```sh
 pnpm build   # tsc --noEmit
-pnpm test    # vitest run — 38 文件 429 用例
+pnpm test    # vitest run — 38 文件 466 用例
 ```
 
 > 内部插件 id 仍为 `ca-v7`（投影键 `ca-v7/*`、`source.plugin='ca-v7'`），发布的包名为 `context-assembler-dsh`——这是稳定的内部标识，用户无感。
@@ -144,6 +148,8 @@ pnpm test    # vitest run — 38 文件 429 用例
 ## 文档
 
 - [docs/DESIGN.md](docs/DESIGN.md) — 设计意图与 Hermes `ca_assembler` 权威对照、修复台账、未闭合路线
+- [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md) — 规划摘要（算力置换 / 缓存纪律 / 路线图 R1-R3 / 运营约定）
+- [docs/PROGRESS-2026-08-20.md](docs/PROGRESS-2026-08-20.md) — 进度汇编（发布状态 / 核心能力 / 近期进展 / 评审质量）
 - [docs/decisions/](docs/decisions/) — 架构决策记录（ADR）
 
 ## 许可

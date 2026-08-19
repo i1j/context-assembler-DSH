@@ -180,7 +180,7 @@ export interface CaPluginConfig {
   entityGraphEnabled?: boolean; // 7.1 P3b：跨会话实体图冷启动加载开关，默认 true
   entityGraphDbPath?: string; // 实体图库路径，默认 ''（复用 realityDbPath）
   toolBackfillEnabled?: boolean; // 7.1 P2：后台 4B intent/outcome 回填开关，默认 true
-  toolBackfillUrl?: string; // 本地 4B 端点，默认 http://127.0.0.1:11435
+  toolBackfillUrl?: string; // 本地 4B 端点（主代理 11435，请求带 X-Queue-Priority: low），默认 http://127.0.0.1:11435
   toolBackfillModel?: string; // 回填模型，默认 qwen3-4b-instruct:32k
   toolBackfillTimeoutMs?: number; // 单次回填超时 ms，默认 30000（min=1000）
   toolBackfillMaxConcurrent?: number; // 回填并发，默认 2（1..8）
