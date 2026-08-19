@@ -67,6 +67,7 @@
 <p align="center">
   <img src="docs/images/context-obs-trend.png" alt="上下文观察镜·历史趋势：CA 实际生效 vs 虚拟推算（不压缩）上下镜像"/>
   <br/><em>上下文观察镜·历史趋势：逐轮（T11–T16）token 累积趋势上下镜像——倒像 = 本会话虚拟推算（正常不压缩），× = 压缩/剪枝；下方为第 16 轮 token 构成拆解。</em>
+  <br/><sub>观察镜 fork 自 <a href="https://github.com/bowenliang123/dsh-context">bowenliang123/dsh-context</a> —— 致谢原作者 @bowenliang123</sub>
 </p>
 
 CA-DSH 是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件实现——纯计算、零主机依赖，设计源自开源 Hermes `ca_assembler`（对照见 [docs/DESIGN.md](docs/DESIGN.md)）。

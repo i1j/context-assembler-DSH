@@ -60,6 +60,7 @@ Observable effect (mirroring CA's actual context against a virtual "no-compressi
 <p align="center">
   <img src="docs/images/context-obs-trend.png" alt="Context observation mirror · history trend: CA actual vs virtual counterfactual (no compression), mirrored up/down"/>
   <br/><em>Context observation mirror · history trend: cumulative token trend per turn (T11–T16) mirrored up/down — inverted = this session's virtual counterfactual (no compression), × = compaction/prune point; below is the turn-16 token-composition breakdown.</em>
+  <br/><sub>Mirror forked from <a href="https://github.com/bowenliang123/dsh-context">bowenliang123/dsh-context</a> — thanks to the original author @bowenliang123</sub>
 </p>
 
 Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (see [docs/DESIGN.md](docs/DESIGN.md)).

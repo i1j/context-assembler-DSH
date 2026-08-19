@@ -7,6 +7,8 @@
   块内前缀稳定至尾部原始数据保护区（`tailN`）、`topicSplitStartChars→topicSplitPeakChars`
   动态降门槛切块（峰值即使内容一致也强制切块）、仅切换话题时重估摘要组合。
   机制描述依据与外部专家对话（2026-08-19/20）中用户亲述的准确定义撰写。
+- 观察镜截图 caption 下方@原作者致谢：fork 自
+  [bowenliang123/dsh-context](https://github.com/bowenliang123/dsh-context)（中英双语）。
 
 ## 2026-08-20 — 插件简介重写（落实专家建议）+ 上下文观察镜截图
 
