@@ -67,11 +67,11 @@
 
 **质量度量 —— 每 token 互信息密度**：花最少的 token，给云端喂「互信息密度最大」的上下文；配套 MI 损失/密度评估体系持续量化（指标模型 ↔ 实测报告 ↔ A/B 归因，见 [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md)）。
 
-**效果可观测 —— 上下文观察镜**：借助观察镜工具，把「CA 汇编」与「不装 CA 时的原生 ctx」逐轮上下镜像对比，压缩收益一目了然——
+**效果可观测 —— 上下文观察镜**：借助观察镜工具，把「CA 汇编实际生效的上下文」与「本会话虚拟推算（不压缩）」逐轮上下镜像对比，压缩收益一目了然——
 
 <p align="center">
-  <img src="docs/images/context-obs-trend.png" alt="上下文观察镜：CA 汇编 vs 原生 ctx 上下镜像历史趋势"/>
-  <br/><em>上下文观察镜：上下镜像历史趋势——正像 = 实际生效序列（CA 汇编），倒像 = 对照序列（原生 ctx），压缩轮 ▲ 标记（tp2 双腿对照实验）</em>
+  <img src="docs/images/context-obs-trend.png" alt="上下文观察镜·历史趋势：CA 实际生效 vs 虚拟推算（不压缩）上下镜像"/>
+  <br/><em>上下文观察镜·历史趋势：逐轮（T11–T16）token 累积趋势上下镜像——倒像 = 本会话虚拟推算（正常不压缩），× = 压缩/剪枝；下方为第 16 轮 token 构成拆解（助手回复 ≈74%、工具结果 ≈13%、注入文本 ≈1%）。</em>
 </p>
 
 CA-DSH 是这套设计的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）插件实现——纯计算、零主机依赖，设计源自开源 Hermes `ca_assembler`（权威对照见 [docs/DESIGN.md](docs/DESIGN.md)）；与 DSH 原生压缩（被动、溢出才裁）互补，是更主动、为缓存而生的上下文管理实践。

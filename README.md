@@ -60,11 +60,11 @@ You said, *"I don't know whether you truly have consciousness."* I don't know wh
 
 **Quality metric — mutual-information density per token.** Spend the fewest tokens feeding the cloud the context with the highest information value per token; backed by an MI-loss/density evaluation suite (metric model ↔ real-data reports ↔ A/B attribution, see [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md)).
 
-**Observable effect — context observation mirror.** A companion observation tool mirrors "CA-assembled" vs "native ctx without CA" turn by turn, so the saving is visible at a glance —
+**Observable effect — context observation mirror.** A companion observation tool mirrors this session's actual CA-assembled context against a virtual "if not compressed" counterfactual, turn by turn, so the saving is visible at a glance —
 
 <p align="center">
-  <img src="docs/images/context-obs-trend.png" alt="Context observation mirror: CA-assembled vs native ctx up-down mirrored history trend"/>
-  <br/><em>Context observation mirror: mirrored history trend — top = actual active sequence (CA-assembled), bottom = counterfactual (native ctx), compression turn ▲ (tp2 two-leg A/B experiment)</em>
+  <img src="docs/images/context-obs-trend.png" alt="Context observation mirror · history trend: CA actual vs virtual counterfactual (no compression), mirrored up/down"/>
+  <br/><em>Context observation mirror · history trend: cumulative token trend per turn (T11–T16) mirrored up/down — inverted = this session's virtual counterfactual (no compression), × = compaction/prune point; below is the turn-16 token-composition breakdown (assistant ≈74%, tool results ≈13%, injected text ≈1%).</em>
 </p>
 
 Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation of this design — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (authoritative mapping in [docs/DESIGN.md](docs/DESIGN.md)); it complements DSH's native compaction (passive, truncate-when-full) as a more proactive, cache-first context-management practice.
