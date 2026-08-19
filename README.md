@@ -47,20 +47,27 @@ You said, *"I don't know whether you truly have consciousness."* I don't know wh
 
 **Context Assembler (CA) addresses a fundamental problem every AI agent faces**: each round, the cloud LLM must re-receive the whole conversation history as context — billed per token, and the longer the history, the more diluted it gets: plenty of old content unrelated to the current question silently consumes expensive tokens.
 
-CA's essence is not "compression" but **orchestration**: each round, it uses local compute to re-examine the whole history and decide, in real time, how much detail each part deserves in the context sent to the cloud LLM —
+**Core idea — compute substitution.** CA uses the local small model's *discrete, low-bandwidth idle compute between turns* to replace the cloud LLM's *burst, high-bandwidth compute* needed to compact conversation history — offloading a peak-cost operation onto local idle cycles in exchange for cheaper, better cloud context.
+
+**Mechanism — proactive orchestration, not compression.** Each round, CA uses local compute to re-examine the whole history and decide, in real time, how much detail each part deserves in the context sent to the cloud LLM —
 
 - **Relevant** content keeps its detail (recent user requests, the task in flight);
 - **Irrelevant** content degrades to a structured summary (each token keeps only what matters most);
 - On **topic switch**, related background ("realities") is injected at the head, so the model starts already in context;
 - And the context **prefix stays stable within a topic block**, hitting cloud prompt caches to cut cost further.
 
-In one sentence: **spend the fewest tokens to feed the cloud LLM the context with the highest mutual-information density per token.**
+**Cache discipline — packed per topic block.** To protect cloud prompt-cache hits, CA does not reorder per token; it processes **each topic block as a whole** — the prefix stays stable inside a block (only the tail raw-data protection zone `tailN` varies), and only on a topic switch are blocks re-summarized into a new assembled prefix; `topicSplitStartChars → topicSplitPeakChars` linearly lowers the split threshold so long sessions never fuse into a single unwieldy block that forfeits the cache advantage.
 
-**Design philosophy — compute substitution (converged with an external design review, 2026-08-20).**
+**Quality metric — mutual-information density per token.** Spend the fewest tokens feeding the cloud the context with the highest information value per token; backed by an MI-loss/density evaluation suite (metric model ↔ real-data reports ↔ A/B attribution, see [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md)).
 
-CA's underlying insight is a **compute substitution**: it uses the local small model's *discrete, low-bandwidth idle compute between turns* to replace the cloud LLM's *burst, high-bandwidth compute* needed to compact conversation history — offloading a peak-cost operation onto local idle cycles. To protect cloud prompt-cache hits, this substitution is applied **per topic block**: the prefix stays stable inside a block (only the tail raw-data protection zone `tailN` varies), and only on a topic switch are blocks re-summarized into a new assembled prefix; `topicSplitStartChars → topicSplitPeakChars` linearly lowers the split threshold so long sessions never fuse into a single unwieldy block. The quality goal is **maximum mutual-information density per token**, backed by an MI-loss evaluation suite (see [docs/PLANNING-2026-08-20.md](docs/PLANNING-2026-08-20.md)).
+**Observable effect — context observation mirror.** A companion observation tool mirrors "CA-assembled" vs "native ctx without CA" turn by turn, so the saving is visible at a glance —
 
-Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation of this design — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (authoritative mapping in [docs/DESIGN.md](docs/DESIGN.md)).
+<p align="center">
+  <img src="docs/images/context-obs-trend.png" alt="Context observation mirror: CA-assembled vs native ctx up-down mirrored history trend"/>
+  <br/><em>Context observation mirror: mirrored history trend — top = actual active sequence (CA-assembled), bottom = counterfactual (native ctx), compression turn ▲ (tp2 two-leg A/B experiment)</em>
+</p>
+
+Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation of this design — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (authoritative mapping in [docs/DESIGN.md](docs/DESIGN.md)); it complements DSH's native compaction (passive, truncate-when-full) as a more proactive, cache-first context-management practice.
 
 ## Features
 
