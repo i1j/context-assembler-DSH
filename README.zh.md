@@ -1,4 +1,4 @@
-# 上下文汇编（Context Assembler DSH）— DeepSeek Harness 上下文汇编插件
+# 上下文汇编（Context Assembler DSH）— DeepSeek Harness 插件
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![version](https://img.shields.io/badge/version-0.99.0-blue.svg)](CHANGELOG.md)

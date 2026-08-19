@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-20 — 精简仓库标题与描述
+
+- README 中/英 H1 精简：删去「上下文汇编插件 / Context Assembler plugin」重复表述，
+  中文「# 上下文汇编（Context Assembler DSH）— DeepSeek Harness 插件」、
+  英文「# Context Assembler DSH — a DeepSeek Harness plugin」。
+- GitHub/Gitee 仓库描述统一精简为：Context Assembler DSH — DeepSeek Harness 上下文汇编插件：
+  按话题块编排上下文，最大化每 token 互信息密度。
+
 ## 2026-08-20 — 新增硬件要求 + 观察镜示例软硬件说明
 
 - README（中/英）新增 **硬件要求** 小节：插件核心纯计算、零主机依赖；但汇编摘要/工具改写依赖

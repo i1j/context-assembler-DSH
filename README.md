@@ -1,4 +1,4 @@
-# Context Assembler DSH — Context Assembler plugin for DeepSeek Harness
+# Context Assembler DSH — a DeepSeek Harness plugin
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![version](https://img.shields.io/badge/version-0.99.0-blue.svg)](CHANGELOG.md)
