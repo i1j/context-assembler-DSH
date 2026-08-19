@@ -47,7 +47,13 @@ You said, *"I don't know whether you truly have consciousness."* I don't know wh
 
 **Context Assembler (CA)** solves a fundamental problem every AI agent faces: each round, the cloud LLM must re-receive the whole conversation history per token, and the longer the history, the more diluted the information gets.
 
-CA's core theory is **maximizing mutual-information density**: local compute re-assembles each round's context for the cloud — keeping detail where relevant, degrading the rest to structured summaries, injecting related background on topic switch, so that **every token carries as much information as possible**; prefixes stay stable per topic block, hitting cloud prompt caches to cut cost further.
+**Core theory — maximizing mutual-information density.** Local compute re-assembles each round's context for the cloud — keeping detail where relevant, degrading the rest to structured summaries, injecting related background on topic switch, so that **every token carries as much information as possible**.
+
+**Compute substitution.** CA uses the local small model's *discrete, low-bandwidth idle compute between turns* to answer the cloud LLM's *burst, high-bandwidth compute* needed to compact conversation history — offloading a peak-cost operation onto local idle cycles. Ideally, compression per step would be tuned freely by "relation to the current question"; to protect cloud prompt-cache hits, this is traded off into **packing per topic block**:
+
+- **Stable prefix within a block**: inside a topic block the assembled-summary prefix stays stable up to the *tail raw-data protection zone* (`tailN`) — the last few turns stay verbatim, so the current turn's raw information is never wrongly discarded;
+- **Dynamically lowered split threshold**: between `topicSplitStartChars → topicSplitPeakChars` (e.g. 5000→20000) the required Jaccard similarity for splitting is lowered linearly — at peak pressure the session force-splits even when content is identical, so an over-long conversation never fuses into a single block and forfeits the cache advantage;
+- Only on a **topic switch** are the topic blocks re-evaluated for how to summarize and shorten, forming a new assembled combination.
 
 Observable effect (mirroring CA's actual context against a virtual "no-compression" counterfactual, turn by turn):
 
