@@ -68,9 +68,14 @@
   <img src="docs/images/context-obs-trend.png" alt="上下文观察镜·历史趋势：CA 实际生效 vs 虚拟推算（不压缩）上下镜像"/>
   <br/><em>上下文观察镜·历史趋势：逐轮（T11–T16）token 累积趋势上下镜像——倒像 = 本会话虚拟推算（正常不压缩），× = 压缩/剪枝；下方为第 16 轮 token 构成拆解。</em>
   <br/><sub>观察镜 fork 自 <a href="https://github.com/bowenliang123/dsh-context">bowenliang123/dsh-context</a> —— 致谢原作者 @bowenliang123</sub>
+  <br/><sub>示例软硬件：本地 Ollama 兼容服务（4B 量化模型）· 约 10G 显存 GPU · DSH Web 0.1.x（随部署而定）</sub>
 </p>
 
 CA-DSH 是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的插件实现——纯计算、零主机依赖，设计源自开源 Hermes `ca_assembler`（对照见 [docs/DESIGN.md](docs/DESIGN.md)）。
+
+## 硬件要求
+
+插件核心逻辑**纯计算、零主机依赖**；但「汇编摘要 / 工具改写」依赖本地小模型（Ollama 兼容接口，4B 级）。**为了较好的效果，建议配备一张约 10G 显存的显卡**（可流畅运行 4B 量化模型）；无独显时以 CPU 推理也可用，汇编耗时随之增加。
 
 ## 特性
 

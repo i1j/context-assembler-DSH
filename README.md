@@ -61,9 +61,14 @@ Observable effect (mirroring CA's actual context against a virtual "no-compressi
   <img src="docs/images/context-obs-trend.png" alt="Context observation mirror · history trend: CA actual vs virtual counterfactual (no compression), mirrored up/down"/>
   <br/><em>Context observation mirror · history trend: cumulative token trend per turn (T11–T16) mirrored up/down — inverted = this session's virtual counterfactual (no compression), × = compaction/prune point; below is the turn-16 token-composition breakdown.</em>
   <br/><sub>Mirror forked from <a href="https://github.com/bowenliang123/dsh-context">bowenliang123/dsh-context</a> — thanks to the original author @bowenliang123</sub>
+  <br/><sub>Example environment: local Ollama-compatible service (quantized 4B model) · ~10 GB VRAM GPU · DSH Web 0.1.x (varies by deployment)</sub>
 </p>
 
 Context Assembler DSH is the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) plugin implementation — pure computation, zero host dependencies, ported from the open-source Hermes `ca_assembler` (see [docs/DESIGN.md](docs/DESIGN.md)).
+
+## Hardware requirements
+
+The plugin core is **pure computation with zero host dependencies**; but "assembled summaries / tool rewriting" rely on a local small model (Ollama-compatible endpoint, 4B-class). **For good results, we recommend a GPU with about 10 GB of VRAM** (comfortably runs a quantized 4B model); without a discrete GPU, CPU inference works too, at the cost of slower assembly.
 
 ## Features
 
